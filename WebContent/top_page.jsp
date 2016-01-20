@@ -146,7 +146,7 @@
 								</h3>
 								<p>
 									<s:property value="start_date" />
-									<s:hidden name="id" value="id" />
+									<input type="hidden" name="id" value="<s:property value="id" />" />
 								</p>
 								<s:submit value="詳細" class="btn btn-primary"/>
 							</div>
