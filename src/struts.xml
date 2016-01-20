@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN "
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+	<!-- 国際化に必要なコンスタント -->
+	<constant name="struts.custom.i18n.resources" value="com.internousdev.rakuraku.property.admin,
+														com.internousdev.rakuraku.property.q_and_a,
+														com.internousdev.rakuraku.property.footer,
+														com.internousdev.rakuraku.property.log_in,"/>
+
+	<constant name="struts.ui.theme" value="simple" />
+	<package extends="struts-default" namespace="/" name="rakuraku">
+
+
+		<!--トップページ画面へ遷移 -->
+		<action name="GoTopPageAction" class="com.internousdev.rakuraku.action.GoTopPageAction"
+			method="execute">
+			<result name="success">top_page.jsp</result>
+			<result name="error">top_page.jsp</result>
+		</action>
+
+		<!--トップページ画面上ページング用 -->
+		<action name="GoTopPageAction2" class="com.internousdev.rakuraku.action.GoTopPageAction2"
+			method="execute">
+			<result name="success">top_page.jsp</result>
+			<result name="error">top_page.jsp</result>
+		</action>
+
+		<!--新規登録画面へ遷移 -->
+		<action name="GoSignUpAction" class="com.internousdev.rakuraku.action.GoSignUpAction"
+			method="execute">
+			<result name="success">sign_up.jsp</result>
+		</action>
+
+		<!--登録確認画面へ遷移 -->
+		<action name="GoSignUpConfirmationAction"
+			class="com.internousdev.rakuraku.action.GoSignUpConfirmationAction"
+			method="execute">
+			<result name="success">sign_up_confirmation.jsp</result>
+		</action>
+
+		<!--登録完了画面へ遷移 -->
+		<action name="GoSignUpSuccessAction"
+			class="com.internousdev.rakuraku.action.GoSignUpSuccessAction"
+			method="execute">
+			<result name="success">sign_up_success.jsp</result>
+		</action>
+
+		<!--ログイン画面へ遷移 -->
+		<action name="GoLogInAction" class="com.internousdev.rakuraku.action.GoLogInAction"
+			method="execute">
+			<result name="success">log_in.jsp</result>
+		</action>
+
+		<!--マイページ画面へ遷移 -->
+		<action name="GoMyPageAction" class="com.internousdev.rakuraku.action.GoMyPageAction"
+			method="execute">
+			<result name="success">my_page.jsp</result>
+		</action>
+
+		<!--登録内容変更画面へ遷移 -->
+		<action name="GoRegistrationChangeAction"
+			class="com.internousdev.rakuraku.action.GoRegistrationChangeAction"
+			method="execute">
+			<result name="success">registration_change.jsp</result>
+		</action>
+
+		<!--変更内容確認画面へ遷移 -->
+		<action name="GoChangesConfirmationAction"
+			class="com.internousdev.rakuraku.action.GoChangesConfirmationAction"
+			method="execute">
+			<result name="success">changes_confirmation.jsp</result>
+			<result name="error">registration_change.jsp</result>
+		</action>
+
+		<!--変更完了画面へ遷移 -->
+		<action name="GoChangeCompletionAction"
+			class="com.internousdev.rakuraku.action.GoChangeCompletionAction"
+			method="execute">
+			<result name="success">change_completion.jsp</result>
+		</action>
+
+		<!--イベント一覧画面へ遷移 -->
+		<action name="GoEventsAction" class="com.internousdev.rakuraku.action.GoEventsAction"
+			method="execute">
+			<result name="success">events.jsp</result>
+			<result name="error">events.jsp</result>
+		</action>
+
+		<!--イベント詳細画面へ遷移 -->
+		<action name="GoEventDetailsAction"
+			class="com.internousdev.rakuraku.action.GoEventDetailsAction" method="execute">
+			<result name="success">event_details.jsp</result>
+		</action>
+
+		<!--購入確認画面へ遷移 -->
+		<action name="GoPurchaseConfirmationAction"
+			class="com.internousdev.rakuraku.action.GoPurchaseConfirmationAction"
+			method="execute">
+			<result name="success">purchase_confirmation.jsp</result>
+		</action>
+
+		<!--購入完了画面へ遷移 -->
+		<action name="GoPurchaseCompletionAction"
+			class="com.internousdev.rakuraku.action.GoPurchaseCompletionAction"
+			method="execute">
+			<result name="success">purchase_completion.jsp</result>
+		</action>
+
+		<!--会社概要画面へ遷移 -->
+		<action name="GoCompanyInfoAction"
+			class="com.internousdev.rakuraku.action.GoCompanyInfoAction" method="execute">
+			<result name="success">company_info.jsp</result>
+		</action>
+
+		<!--規約画面へ遷移 -->
+		<action name="GoAgreementAction"
+			class="com.internousdev.rakuraku.action.GoAgreementAction" method="execute">
+			<result name="success">agreement.jsp</result>
+		</action>
+
+		<!--Q&A画面へ遷移 -->
+		<action name="GoQAndAAction" class="com.internousdev.rakuraku.action.GoQAndAAction"
+			method="execute">
+			<result name="success">q_and_a.jsp</result>
+		</action>
+
+		<!--退会確認画面へ遷移 -->
+		<action name="GoWithdrawalConfirmationAction" class="com.internousdev.rakuraku.action.GoWithdrawalConfirmationAction"
+			method="execute">
+			<result name="success">withdrawal_confirmation.jsp</result>
+		</action>
+
+		<!--退会画面へ遷移 -->
+		<action name="GoWithdrawalAction" class="com.internousdev.rakuraku.action.GoWithdrawalAction"
+			method="execute">
+			<result name="success">withdrawal.jsp</result>
+		</action>
+
+		<!--未ログインのヘッダーへ遷移 -->
+		<action name="GoHeaderLogOutAction"
+			class="com.internousdev.rakuraku.action.GoHeaderLogOutAction" method="execute">
+			<result name="success">header_log_out.jsp</result>
+		</action>
+
+		<!--新規登録中の未ログインヘッダーへ遷移 -->
+		<action name="GoHeaderLogOutSignUpAction"
+			class="com.internousdev.rakuraku.action.GoHeaderLogOutSignUpAction"
+			method="execute">
+			<result name="success">header_log_out_sign_up.jsp</result>
+		</action>
+
+		<!--ログイン状態のヘッダーへ遷移 -->
+		<action name="GoHeaderLogInAction"
+			class="com.internousdev.rakuraku.action.GoHeaderLogOutSignUpAction"
+			method="execute">
+			<result name="success">header_log_in.jsp</result>
+		</action>
+
+		<!--通常のフッターへ遷移 -->
+		<action name="GoFooterAction" class="com.internousdev.rakuraku.action.GoFooterAction"
+			method="execute">
+			<result name="success">footer.jsp</result>
+		</action>
+
+		<!--マイページのフッターへ遷移 -->
+		<action name="GoFooterMyPageAction"
+			class="com.internousdev.rakuraku.action.GoFooterMyPageAction" method="execute">
+			<result name="success">footer_my_page.jsp</result>
+		</action>
+
+		<!--管理者ログイン画面へ遷移 -->
+		<action name="GoAdminLogInAction"
+			class="com.internousdev.rakuraku.action.GoAdminLogInAction" method="execute">
+			<result name="success">admin_log_in.jsp</result>
+		</action>
+
+		<!--ユーザー管理画面へ遷移 -->
+		<action name="GoAdminUserAction"
+			class="com.internousdev.rakuraku.action.GoAdminUserAction" method="execute">
+			<result name="success">admin_user.jsp</result>
+		</action>
+
+		<!--購入情報管理画面へ遷移 -->
+		<action name="GoAdminPurchaseAction"
+			class="com.internousdev.rakuraku.action.GoAdminPurchaseAction"
+			method="execute">
+			<result name="success">admin_purchase.jsp</result>
+		</action>
+
+		<!--客席稼働率画面へ遷移 -->
+		<action name="GoAdminCapacityAction"
+			class="com.internousdev.rakuraku.action.GoAdminCapacityAction"
+			method="execute">
+			<result name="success">admin_capacity.jsp</result>
+		</action>
+
+		<!--イベント管理画面へ遷移 -->
+		<action name="GoAdminEventsAction"
+			class="com.internousdev.rakuraku.action.GoAdminEventsAction" method="execute">
+			<result name="success">admin_events.jsp</result>
+		</action>
+
+		<!--管理者画面へログイン -->
+		<action name="AdminLogInAction"
+			class="com.internousdev.rakuraku.action.AdminLogInAction" method="execute">
+			<result name="SUCCESS">admin_user.jsp</result>
+			<result name="ERROR">admin_log_in.jsp</result>
+		</action>
+
+		<!--お問い合わせ内容 -->
+		<action name="InsertContactAction"
+			class="com.internousdev.rakuraku.action.InsertContactAction" method="execute">
+			<result name="success">q_and_a.jsp</result>
+			<result name="error">q_and_a.jsp</result>
+			<result name="input">q_and_a.jsp</result>
+		</action>
+
+		<!--ログイン後トップページ画面へ遷移 -->
+        <action name="GoTopPageAction1" class="com.internousdev.rakuraku.action.GoTopPageAction1"
+            method="execute">
+            <result name="success">index.jsp</result>
+            <result name="error">log_in.jsp</result>
+        </action>
+
+
+
+
+
+
+	</package>
+
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+</struts>

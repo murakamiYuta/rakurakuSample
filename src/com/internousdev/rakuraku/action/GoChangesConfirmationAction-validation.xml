@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.3//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+  <!-- 未入力チェック -->
+
+<validators>
+
+	<field name="name">
+		<field-validator type="requiredstring">
+		<!-- messageタグは画面出力 -->
+			<message>入力必須です</message>
+		</field-validator>
+	</field>
+
+	<field name="name_kana">
+		<field-validator type="requiredstring">
+		<!-- messageタグは画面出力 -->
+			<message>入力必須です</message>
+		</field-validator>
+	</field>
+
+	<field name="password">
+		<field-validator type="requiredstring">
+		<!-- messageタグは画面出力 -->
+			<message>入力必須です</message>
+		</field-validator>
+	</field>
+
+	<field name="confirm_password">
+		<field-validator type="requiredstring">
+		<!-- messageタグは画面出力 -->
+			<message>入力必須です</message>
+		</field-validator>
+	</field>
+
+	<field name="email">
+		<field-validator type="requiredstring">
+		<!-- messageタグは画面出力 -->
+			<message>入力必須です</message>
+		</field-validator>
+	</field>
+
+	<field name="email">
+		<field-validator type="email">
+		<!-- messageタグは画面出力 -->
+			<message>正しいメールアドレスではありません</message>
+		</field-validator>
+	</field>
+
+	<field name="confirm_email">
+		<field-validator type="requiredstring">
+		<!-- messageタグは画面出力 -->
+			<message>入力必須です</message>
+		</field-validator>
+	</field>
+
+	<field name="confirm_email">
+		<field-validator type="email">
+		<!-- messageタグは画面出力 -->
+			<message>正しいメールアドレスではありません</message>
+		</field-validator>
+	</field>
+
+
+</validators>
