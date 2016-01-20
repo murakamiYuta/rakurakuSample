@@ -4,7 +4,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; GoTopPageAction">
+<meta http-equiv="refresh" content="0; GoTopPageAction?number=1">
 <title>落楽.com</title>
 </head>
 <body>
