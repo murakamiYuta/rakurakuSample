@@ -16,30 +16,32 @@ public class GoTopPageDAO {
 
 	private int pageNumber;
 
-	private int listLast;
-	private int listHead;
+	private int previous;
+	private int beforePage;
 
 
 
 	private ArrayList<GoTopPageDTO> eventsList = new ArrayList<GoTopPageDTO>();
+	private ArrayList<GoTopPageDTO> elementCountAfter = new ArrayList<GoTopPageDTO>();
 
 	public boolean topPage(int pageNumber) {
 		boolean result = false;
 		Connection conn = DBConnector.getConnection();
-		String sql = "SELECT id,name,img_path,start_date FROM event WHERE start_date >= DATE(NOW()) ORDER BY start_date LIMIT ?,6";
+		String sql = "SELECT id,name,img_path,start_date FROM event WHERE start_date >= DATE(NOW()) ORDER BY start_date LIMIT ?,13";
 
 		System.out.println("DAOまできてますよ。"+pageNumber);
 
-		int listHead =(pageNumber*6)-6;
+		beforePage=pageNumber*6;
+		previous =beforePage-6;
 
-		System.out.println("listHead"+listHead);
-		System.out.println("listLast"+listLast);
+		System.out.println("listHead"+previous);
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, listHead);
+			ps.setInt(1, previous);
 
 			ResultSet rs = ps.executeQuery();
+			int i = 0;
 			while (rs.next()) {
 				GoTopPageDTO dto = new GoTopPageDTO();
 				dto.setId(rs.getInt("id"));
@@ -48,7 +50,13 @@ public class GoTopPageDAO {
 				SimpleDateFormat format = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
 				String formatDate = format.format(rs.getDate("start_date"));
 				dto.setStart_date(formatDate);
-				eventsList.add(dto);
+				i++;
+				if(i<=6){
+					elementCountAfter.add(dto);
+					eventsList.add(dto);
+				}else{
+					elementCountAfter.add(dto);
+				}
 				result = true;
 			}
 
@@ -65,9 +73,47 @@ public class GoTopPageDAO {
 
 	}
 
+	/**
+	 * @return pageNumber
+	 */
+	public int getPageNumber() {
+		return pageNumber;
+	}
 
+	/**
+	 * @param pageNumber セットする pageNumber
+	 */
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
+	}
 
+	/**
+	 * @return previous
+	 */
+	public int getPrevious() {
+		return previous;
+	}
 
+	/**
+	 * @param previous セットする previous
+	 */
+	public void setPrevious(int previous) {
+		this.previous = previous;
+	}
+
+	/**
+	 * @return beforePage
+	 */
+	public int getBeforePage() {
+		return beforePage;
+	}
+
+	/**
+	 * @param beforePage セットする beforePage
+	 */
+	public void setBeforePage(int beforePage) {
+		this.beforePage = beforePage;
+	}
 
 	/**
 	 * @return eventsList
@@ -83,59 +129,22 @@ public class GoTopPageDAO {
 		this.eventsList = eventsList;
 	}
 
-
-
-
+	/**
+	 * @return elementCountAfter
+	 */
+	public ArrayList<GoTopPageDTO> getElementCountAfter() {
+		return elementCountAfter;
+	}
 
 	/**
-	 * @return pageNumber
+	 * @param elementCountAfter セットする elementCountAfter
 	 */
-	public int getPageNumber() {
-		return pageNumber;
+	public void setElementCountAfter(ArrayList<GoTopPageDTO> elementCountAfter) {
+		this.elementCountAfter = elementCountAfter;
 	}
 
 
 
-
-
-	/**
-	 * @param pageNumber セットする pageNumber
-	 */
-	public void setPageNumber(int pageNumber) {
-		this.pageNumber = pageNumber;
-	}
-
-
-
-
-
-	public int getListLast() {
-		return listLast;
-	}
-
-
-
-
-
-	public void setListLast(int listLast) {
-		this.listLast = listLast;
-	}
-
-
-
-
-
-	public int getListHead() {
-		return listHead;
-	}
-
-
-
-
-
-	public void setListHead(int listHead) {
-		this.listHead = listHead;
-	}
 
 
 

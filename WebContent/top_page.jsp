@@ -29,7 +29,12 @@
     <!--[endif]-->
 </head>
 <body>
-	<jsp:include page="header_log_in.jsp" />
+	<s:if test = '#session.userId' >
+	<jsp:include page="header_log_in.jsp"/>
+	</s:if>
+	<s:else>
+	<jsp:include page="header_log_out.jsp"/>
+	</s:else>
 	<hr>
 	<div class="container well">
 
@@ -164,21 +169,61 @@
 <!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
 <!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
 
-			<!-- ページネーション-->
-			<ul class="pagination">
-				<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-				<li><a href="GoTopPageAction?number=1">1</a></li>
-				<li><a href="GoTopPageAction?number=2">2</a></li>
-				<li><a href="GoTopPageAction?number=3">3</a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
+			<!-- ページネーション 前部分-->
+
+		<ul class="pagination">
+			<s:if test= "elementBefore >=12" >
+					<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+					<li><a href="GoTopPageAction?number=<s:property value="pageButton1" /> "><s:property value="pageButton1" /></a></li>
+					<li><a href="GoTopPageAction?number=<s:property value="pageButton2" /> "><s:property value="pageButton2" /></a></li>
+			</s:if>
+			<s:else>
+				<s:if test= "elementBefore=6" >
+						<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+						<li><a href="GoTopPageAction?number=<s:property value="pageButton2" /> "><s:property value="pageButton2" /></a></li>
+				</s:if>
+				<s:else>
+						<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+				</s:else>
+			</s:else>
+
+			<s:if test= "elementCountAfter.size()>=13" >
+			<li><a href="GoTopPageAction?number=<s:property value="pageButton3" />" class="active" ><s:property value="pageButton3" /></a></li>
+			<li><a href="GoTopPageAction?number=<s:property value="pageButton4" /> "><s:property value="pageButton4" /></a></li>
+			<li><a href="GoTopPageAction?number=<s:property value="pageButton5" /> "><s:property value="pageButton5" /></a></li>
+				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+			</s:if>
+			<s:else>
+				<s:if test= "elementCountAfter.size()<=12 && elementCountAfter.size()>=7" >
+					<li><a href="GoTopPageAction?number=<s:property value="pageButton3" /> " class="active"><s:property value="pageButton3" /></a></li>
+					<li><a href="GoTopPageAction?number=<s:property value="pageButton4" /> "><s:property value="pageButton4" /></a></li>
+					<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+				</s:if>
+				<s:else>
+					<li><a href="GoTopPageAction?number=<s:property value="pageButton3" /> " class="active"><s:property value="pageButton3" /></a></li>
+					<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+				</s:else>
+			</s:else>
+		</ul>
+
+
+
+
+
+
+
+
 
 		</nav>
 	</div>
 
 	<hr>
-	<jsp:include page="footer.jsp" />
+	<s:if test = '#session.userId' >
+	<jsp:include page="footer_my_page.jsp"/>
+	</s:if>
+	<s:else>
+	<jsp:include page="footer.jsp"/>
+	</s:else>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
