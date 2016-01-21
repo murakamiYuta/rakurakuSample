@@ -146,6 +146,7 @@
 								</h3>
 								<p>
 									<s:property value="start_date" />
+
 									<input type="hidden" name="id" value="<s:property value="id" />" />
 								</p>
 								<s:submit value="詳細" class="btn btn-primary"/>
@@ -157,12 +158,18 @@
 			</s:iterator>
 		</div>
 		<nav class="text-center">
-
+<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
+<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
+<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
+<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
+<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
 
 			<!-- ページネーション-->
 			<ul class="pagination">
 				<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
 				<li><a href="GoTopPageAction2?number=1">1</a></li>
+				<li><a href="GoTopPageAction2?number=2">2</a></li>
+				<li><a href="GoTopPageAction2?number=3">3</a></li>
 				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
