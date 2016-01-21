@@ -26,12 +26,11 @@ public class GoTopPageDAO {
 	public boolean topPage(int pageNumber) {
 		boolean result = false;
 		Connection conn = DBConnector.getConnection();
-		String sql = "SELECT id,name,img_path,start_date FROM event WHERE start_date >= DATE(NOW()) ORDER BY start_date LIMIT ?,?";
+		String sql = "SELECT id,name,img_path,start_date FROM event WHERE start_date >= DATE(NOW()) ORDER BY start_date LIMIT ?,6";
 
 		System.out.println("DAOまできてますよ。"+pageNumber);
 
-		int listLast =pageNumber*6;
-		int listHead =listLast-6;
+		int listHead =(pageNumber*6)-6;
 
 		System.out.println("listHead"+listHead);
 		System.out.println("listLast"+listLast);
@@ -39,7 +38,7 @@ public class GoTopPageDAO {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, listHead);
-			ps.setInt(2, listLast);
+
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				GoTopPageDTO dto = new GoTopPageDTO();

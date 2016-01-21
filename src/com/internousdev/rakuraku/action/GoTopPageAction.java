@@ -34,7 +34,6 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 	private HttpServletResponse response;
 
 
-
 	private ArrayList<GoTopPageDTO> eventsList = new ArrayList<GoTopPageDTO>();
 
 	public String execute() throws SQLException {
