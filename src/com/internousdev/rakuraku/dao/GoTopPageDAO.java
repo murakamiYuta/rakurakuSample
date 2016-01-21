@@ -16,6 +16,10 @@ public class GoTopPageDAO {
 
 	private int pageNumber;
 
+	private int listLast;
+	private int listHead;
+
+
 
 	private ArrayList<GoTopPageDTO> eventsList = new ArrayList<GoTopPageDTO>();
 
@@ -25,8 +29,13 @@ public class GoTopPageDAO {
 		String sql = "SELECT id,name,img_path,start_date FROM event WHERE start_date >= DATE(NOW()) ORDER BY start_date LIMIT ?,?";
 
 		System.out.println("DAOまできてますよ。"+pageNumber);
-		int listLast =6*pageNumber;
+
+		int listLast =pageNumber*6;
 		int listHead =listLast-6;
+
+		System.out.println("listHead"+listHead);
+		System.out.println("listLast"+listLast);
+
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, listHead);
@@ -96,6 +105,40 @@ public class GoTopPageDAO {
 	public void setPageNumber(int pageNumber) {
 		this.pageNumber = pageNumber;
 	}
+
+
+
+
+
+	public int getListLast() {
+		return listLast;
+	}
+
+
+
+
+
+	public void setListLast(int listLast) {
+		this.listLast = listLast;
+	}
+
+
+
+
+
+	public int getListHead() {
+		return listHead;
+	}
+
+
+
+
+
+	public void setListHead(int listHead) {
+		this.listHead = listHead;
+	}
+
+
 
 
 

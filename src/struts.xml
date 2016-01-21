@@ -21,12 +21,6 @@
 			<result name="error">top_page.jsp</result>
 		</action>
 
-		<!--トップページ画面上ページング用 -->
-		<action name="GoTopPageAction2" class="com.internousdev.rakuraku.action.GoTopPageAction2"
-			method="execute">
-			<result name="success">top_page.jsp</result>
-			<result name="error">top_page.jsp</result>
-		</action>
 
 		<!--新規登録画面へ遷移 -->
 		<action name="GoSignUpAction" class="com.internousdev.rakuraku.action.GoSignUpAction"
