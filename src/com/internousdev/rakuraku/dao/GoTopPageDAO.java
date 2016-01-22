@@ -22,12 +22,15 @@ public class GoTopPageDAO {
 
 
 	private ArrayList<GoTopPageDTO> eventsList = new ArrayList<GoTopPageDTO>();
-	private ArrayList<GoTopPageDTO> elementCountAfter = new ArrayList<GoTopPageDTO>();
+	private ArrayList<GoTopPageDTO> eventsCount = new ArrayList<GoTopPageDTO>();
+	private ArrayList<Integer> pageList = new ArrayList<Integer>();
+
+
 
 	public boolean topPage(int pageNumber) {
 		boolean result = false;
 		Connection conn = DBConnector.getConnection();
-		String sql = "SELECT id,name,img_path,start_date FROM event WHERE start_date >= DATE(NOW()) ORDER BY start_date LIMIT ?,13";
+		String sql = "SELECT id,name,img_path,start_date FROM event WHERE start_date >= DATE(NOW()) ORDER BY start_date LIMIT ?,25";
 
 		System.out.println("DAOまできてますよ。"+pageNumber);
 
@@ -52,13 +55,20 @@ public class GoTopPageDAO {
 				dto.setStart_date(formatDate);
 				i++;
 				if(i<=6){
-					elementCountAfter.add(dto);
 					eventsList.add(dto);
+					eventsCount.add(dto);
 				}else{
-					elementCountAfter.add(dto);
+					eventsCount.add(dto);
 				}
+
 				result = true;
 			}
+			System.out.println(eventsCount.size()+"件読み込みました。");
+
+
+
+
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -130,18 +140,33 @@ public class GoTopPageDAO {
 	}
 
 	/**
-	 * @return elementCountAfter
+	 * @return pageList
 	 */
-	public ArrayList<GoTopPageDTO> getElementCountAfter() {
-		return elementCountAfter;
+	public ArrayList<Integer> getPageList() {
+		return pageList;
 	}
 
 	/**
-	 * @param elementCountAfter セットする elementCountAfter
+	 * @param pageList セットする pageList
 	 */
-	public void setElementCountAfter(ArrayList<GoTopPageDTO> elementCountAfter) {
-		this.elementCountAfter = elementCountAfter;
+	public void setPageList(ArrayList<Integer> pageList) {
+		this.pageList = pageList;
 	}
+
+	/**
+	 * @return eventsCount
+	 */
+	public ArrayList<GoTopPageDTO> getEventsCount() {
+		return eventsCount;
+	}
+
+	/**
+	 * @param eventsCount セットする eventsCount
+	 */
+	public void setEventsCount(ArrayList<GoTopPageDTO> eventsCount) {
+		this.eventsCount = eventsCount;
+	}
+
 
 
 

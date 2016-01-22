@@ -13,12 +13,11 @@ import com.internousdev.rakuraku.dao.GoTopPageDAO;
 import com.internousdev.rakuraku.dto.GoTopPageDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class GoTopPageAction extends ActionSupport implements ServletResponseAware,ServletRequestAware {
+public class GoTopPageAction extends ActionSupport implements ServletResponseAware, ServletRequestAware {
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = -5298332223878290894L;
-
 
 	/**
 	 * リクエスト
@@ -36,80 +35,126 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 	private int pageButton4;
 	private int pageButton5;
 
-
 	/**
 	 * レスポンス
 	 */
 	private HttpServletResponse response;
 
-
 	private ArrayList<GoTopPageDTO> eventsList = new ArrayList<GoTopPageDTO>();
-	private ArrayList<GoTopPageDTO> elementCountAfter = new ArrayList<GoTopPageDTO>();
+	private ArrayList<GoTopPageDTO> eventsCount = new ArrayList<GoTopPageDTO>();
+	private ArrayList<Integer> pageList = new ArrayList<Integer>();
 
 	public String execute() throws SQLException {
 		String result = ERROR;
-        System.out.println(request.getParameter("number"));
-        String pram=request.getParameter("number");
-        if(pram==null||pram.length()==0){
-        	pageNumber=1;
-        }else {
+		System.out.println(request.getParameter("number"));
+		String pram = request.getParameter("number");
+		if (pram == null || pram.length() == 0) {
+			pageNumber = 1;
+		} else {
 			try {
-				pageNumber=Integer.parseInt(pram);
+				pageNumber = Integer.parseInt(pram);
 			} catch (NumberFormatException e) {
 				pageNumber = 1;
 			}
 		}
-        System.out.println("ページ数の設定はできてる"+pageNumber);
+		System.out.println("ページ数の設定はできてる" + pageNumber);
 		GoTopPageDAO dao = new GoTopPageDAO();
 
 		if (dao.topPage(pageNumber)) {
 			eventsList = dao.getEventsList();
-			elementCountAfter = dao.getElementCountAfter();
+			pageList = dao.getPageList();
 			setElementBefore(getPrevious());
-			result=SUCCESS;
+			result = SUCCESS;
 		}
-		setPageButton1(getPageNumber()-2);
-		setPageButton2(getPageNumber()-1);
-		setPageButton3(getPageNumber());
-		setPageButton4(getPageNumber()+1);
-		setPageButton5(getPageNumber()+2);
+
+		int maxPages = (dao.getEventsCount().size() / 6) + 1;
+
+		System.out.println(maxPages);
+
+		if (pageNumber == 1) {
+			System.out.println("1ページ");
+			for (int page = pageNumber, pageBotton = 1; page <= maxPages || pageBotton <= 5; page++) {
+				pageList.add(page);
+				pageBotton++;
+			}
+
+		} else if (pageNumber == 2) {
+			System.out.println("2ページ");
+			for (int page = (pageNumber - 1), pageBotton = 1; page <= maxPages|| pageBotton <= 5; page++) {
+				pageList.add(page);
+				pageBotton++;
+			}
+
+		} else if (pageNumber >= 3 && maxPages >= 3) {
+			System.out.println("3ページ");
+			for (int page = (pageNumber - 2), pageBotton = 1; page <= maxPages || pageBotton <= 5; page++) {
+				pageList.add(page);
+				pageBotton++;
+			}
+
+		} else if (pageNumber >= 4 && maxPages == 2) {
+			System.out.println("4ページ");
+			for (int page = (pageNumber - 3), pageBotton = 1; page <= (maxPages + 3)|| pageBotton <= 5; page++) {
+				pageList.add(page);
+				pageBotton++;
+			}
+
+		} else if (pageNumber >= 4 && maxPages == 1) {
+			System.out.println("5ページ");
+			for (int page = (pageNumber - 4), pageBotton = 1; page <= (maxPages + 4)|| pageBotton <= 5; page++) {
+				pageList.add(page);
+				pageBotton++;
+			}
+
+		}
+
+		/*
+		 * 表示するページを確認
+		 */
+		for (int check = 0; check < pageList.size(); check++) {
+			System.out.println(pageList.get(check));
+		}
 
 		return result;
 	}
 
-
-
 	/**
 	 * リクエスト格納メソッド
-	 * @param request リクエスト
+	 *
+	 * @param request
+	 *            リクエスト
 	 */
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
+
 	/**
 	 * レスポンス格納メソッド
-	 * @param response レスポンス
+	 *
+	 * @param response
+	 *            レスポンス
 	 */
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 	}
+
 	/**
 	 * リクエスト取得メソッド
+	 *
 	 * @return request リクエスト
 	 */
 	public HttpServletRequest getRequest() {
 		return request;
 	}
 
-
 	/**
 	 * レスポンス取得メソッド
+	 *
 	 * @return response レスポンス
 	 */
 	public HttpServletResponse getResponse() {
 		return response;
 	}
-
 
 	/**
 	 * @return pageNumber
@@ -118,14 +163,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return pageNumber;
 	}
 
-
 	/**
-	 * @param pageNumber セットする pageNumber
+	 * @param pageNumber
+	 *            セットする pageNumber
 	 */
 	public void setPageNumber(int pageNumber) {
 		this.pageNumber = pageNumber;
 	}
-
 
 	/**
 	 * @return eventsList
@@ -134,30 +178,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return eventsList;
 	}
 
-
 	/**
-	 * @param eventsList セットする eventsList
+	 * @param eventsList
+	 *            セットする eventsList
 	 */
 	public void setEventsList(ArrayList<GoTopPageDTO> eventsList) {
 		this.eventsList = eventsList;
 	}
-
-
-	/**
-	 * @return elementCountAfter
-	 */
-	public ArrayList<GoTopPageDTO> getElementCountAfter() {
-		return elementCountAfter;
-	}
-
-
-	/**
-	 * @param elementCountAfter セットする elementCountAfter
-	 */
-	public void setElementCountAfter(ArrayList<GoTopPageDTO> elementCountAfter) {
-		this.elementCountAfter = elementCountAfter;
-	}
-
 
 	/**
 	 * @return elementBefore
@@ -166,14 +193,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return elementBefore;
 	}
 
-
 	/**
-	 * @param elementBefore セットする elementBefore
+	 * @param elementBefore
+	 *            セットする elementBefore
 	 */
 	public void setElementBefore(int elementBefore) {
 		this.elementBefore = elementBefore;
 	}
-
 
 	/**
 	 * @return previous
@@ -182,15 +208,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return previous;
 	}
 
-
 	/**
-	 * @param previous セットする previous
+	 * @param previous
+	 *            セットする previous
 	 */
 	public void setPrevious(int previous) {
 		this.previous = previous;
 	}
-
-
 
 	/**
 	 * @return pageButton1
@@ -199,16 +223,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return pageButton1;
 	}
 
-
-
 	/**
-	 * @param pageButton1 セットする pageButton1
+	 * @param pageButton1
+	 *            セットする pageButton1
 	 */
 	public void setPageButton1(int pageButton1) {
 		this.pageButton1 = pageButton1;
 	}
-
-
 
 	/**
 	 * @return pageButton2
@@ -217,16 +238,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return pageButton2;
 	}
 
-
-
 	/**
-	 * @param pageButton2 セットする pageButton2
+	 * @param pageButton2
+	 *            セットする pageButton2
 	 */
 	public void setPageButton2(int pageButton2) {
 		this.pageButton2 = pageButton2;
 	}
-
-
 
 	/**
 	 * @return pageButton3
@@ -235,16 +253,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return pageButton3;
 	}
 
-
-
 	/**
-	 * @param pageButton3 セットする pageButton3
+	 * @param pageButton3
+	 *            セットする pageButton3
 	 */
 	public void setPageButton3(int pageButton3) {
 		this.pageButton3 = pageButton3;
 	}
-
-
 
 	/**
 	 * @return pageButton4
@@ -253,16 +268,13 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return pageButton4;
 	}
 
-
-
 	/**
-	 * @param pageButton4 セットする pageButton4
+	 * @param pageButton4
+	 *            セットする pageButton4
 	 */
 	public void setPageButton4(int pageButton4) {
 		this.pageButton4 = pageButton4;
 	}
-
-
 
 	/**
 	 * @return pageButton5
@@ -271,20 +283,42 @@ public class GoTopPageAction extends ActionSupport implements ServletResponseAwa
 		return pageButton5;
 	}
 
-
-
 	/**
-	 * @param pageButton5 セットする pageButton5
+	 * @param pageButton5
+	 *            セットする pageButton5
 	 */
 	public void setPageButton5(int pageButton5) {
 		this.pageButton5 = pageButton5;
 	}
 
+	/**
+	 * @return pageList
+	 */
+	public ArrayList<Integer> getPageList() {
+		return pageList;
+	}
 
+	/**
+	 * @param pageList
+	 *            セットする pageList
+	 */
+	public void setPageList(ArrayList<Integer> pageList) {
+		this.pageList = pageList;
+	}
 
+	/**
+	 * @return eventsCount
+	 */
+	public ArrayList<GoTopPageDTO> getEventsCount() {
+		return eventsCount;
+	}
 
-
-
-
+	/**
+	 * @param eventsCount
+	 *            セットする eventsCount
+	 */
+	public void setEventsCount(ArrayList<GoTopPageDTO> eventsCount) {
+		this.eventsCount = eventsCount;
+	}
 
 }

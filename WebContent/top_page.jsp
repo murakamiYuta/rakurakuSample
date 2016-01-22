@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>落楽.com</title>
+<title><s:text name = "top_page.title"/></title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.css">
@@ -41,17 +41,17 @@
 		<form method="post" action="GoEventsAction" class="form-inline">
 
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="イベント名"
+				<input type="text" class="form-control" placeholder="<s:text name = "top_page.event_name"/>"
 					size="16" name="events_name">
 			</div>
 
 
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="噺家名" size="16"
+				<input type="text" class="form-control" placeholder="<s:text name = "top_page.storyteller"/>" size="16"
 					name="story_teller">
 			</div>
 			<select name="year">
-				<option value="　　　">開催年</option>
+				<option value="　　　"><s:text name = "top_page.held_year"/></option>
 				<option value="2016年">2016年</option>
 				<option value="2017年">2017年</option>
 				<option value="2018年">2018年</option>
@@ -65,7 +65,7 @@
 				<option value="2026年">2026年</option>
 				<option value="2027年">2027年</option>
 			</select> <select name="month">
-				<option value="　　　">開催月</option>
+				<option value="　　　"><s:text name = "top_page.held_month"/></option>
 				<option value="1月">1月</option>
 				<option value="2月">2月</option>
 				<option value="3月">3月</option>
@@ -79,7 +79,7 @@
 				<option value="11月">11月</option>
 				<option value="12月">12月</option>
 			</select> <select name="pref_id">
-				<option value="　　　" selected>都道府県</option>
+				<option value="　　　" selected><s:text name = "top_page.prefectures"/></option>
 				<option value="北海道">北海道</option>
 				<option value="青森県">青森県</option>
 				<option value="岩手県">岩手県</option>
@@ -133,7 +133,7 @@
 	</div>
 	<hr>
 
-	<h2 class="text-center">近日開催イベント</h2>
+	<h2 class="text-center"><s:text name = "top_page.subject"/></h2>
 	<hr>
 	<div class="container">
 		<div class="row text-center">
@@ -154,7 +154,7 @@
 
 									<input type="hidden" name="id" value="<s:property value="id" />" />
 								</p>
-								<s:submit value="詳細" class="btn btn-primary"/>
+								<s:submit value="%{getText('top_page.detail')}" class="btn btn-primary"/>
 							</div>
 						</div>
 					</div>
@@ -163,47 +163,16 @@
 			</s:iterator>
 		</div>
 		<nav class="text-center">
-<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
-<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
-<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
-<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
-<!-- サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用サンプル用 -->
 
 			<!-- ページネーション 前部分-->
 
 		<ul class="pagination">
-			<s:if test= "elementBefore >=12" >
 					<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-					<li><a href="GoTopPageAction?number=<s:property value="pageButton1" /> "><s:property value="pageButton1" /></a></li>
-					<li><a href="GoTopPageAction?number=<s:property value="pageButton2" /> "><s:property value="pageButton2" /></a></li>
-			</s:if>
-			<s:else>
-				<s:if test= "elementBefore=6" >
-						<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-						<li><a href="GoTopPageAction?number=<s:property value="pageButton2" /> "><s:property value="pageButton2" /></a></li>
-				</s:if>
-				<s:else>
-						<li><a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-				</s:else>
-			</s:else>
+					<s:iterator value="pageList"  status="st">
+					<li><a href="GoTopPageAction?number=<s:property />" ><s:property /></a></li>
+					</s:iterator>
 
-			<s:if test= "elementCountAfter.size()>=13" >
-			<li><a href="GoTopPageAction?number=<s:property value="pageButton3" />" class="active" ><s:property value="pageButton3" /></a></li>
-			<li><a href="GoTopPageAction?number=<s:property value="pageButton4" /> "><s:property value="pageButton4" /></a></li>
-			<li><a href="GoTopPageAction?number=<s:property value="pageButton5" /> "><s:property value="pageButton5" /></a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-			</s:if>
-			<s:else>
-				<s:if test= "elementCountAfter.size()<=12 && elementCountAfter.size()>=7" >
-					<li><a href="GoTopPageAction?number=<s:property value="pageButton3" /> " class="active"><s:property value="pageButton3" /></a></li>
-					<li><a href="GoTopPageAction?number=<s:property value="pageButton4" /> "><s:property value="pageButton4" /></a></li>
 					<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-				</s:if>
-				<s:else>
-					<li><a href="GoTopPageAction?number=<s:property value="pageButton3" /> " class="active"><s:property value="pageButton3" /></a></li>
-					<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-				</s:else>
-			</s:else>
 		</ul>
 
 

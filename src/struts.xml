@@ -8,7 +8,8 @@
 	<constant name="struts.custom.i18n.resources" value="com.internousdev.rakuraku.property.admin,
 														com.internousdev.rakuraku.property.q_and_a,
 														com.internousdev.rakuraku.property.footer,
-														com.internousdev.rakuraku.property.log_in,"/>
+														com.internousdev.rakuraku.property.log_in,
+														com.internousdev.rakuraku.property.top_page,"/>
 
 	<constant name="struts.ui.theme" value="simple" />
 	<package extends="struts-default" namespace="/" name="rakuraku">
